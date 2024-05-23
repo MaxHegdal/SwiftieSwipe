@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import SongDisplay from './components/SongDisplay';
+import { useState } from "react";
+import SongDisplay from "./components/SongDisplay";
 
 const songs = [
   { title: "Love Story", album: "Fearless" },
@@ -17,6 +17,7 @@ const Home = () => {
 
   const handleNext = () => {
     const nextIndex = (currentIndex + 1) % songs.length;
+    console.log(nextIndex);
     setCurrentIndex(nextIndex);
     setCurrentSong(songs[nextIndex]);
   };
@@ -26,7 +27,12 @@ const Home = () => {
       <h1>SwiftieSwipe</h1>
       <div>
         <SongDisplay song={currentSong} onNext={handleNext} />
-        <button onClick={() => window.location.href = '/list'}>Visa min lista</button>
+        <SongDisplay
+          song={songs[(currentIndex + 1) % songs.length]}
+          onNext={handleNext}
+        />
+        <button>
+        </button>
       </div>
     </main>
   );
