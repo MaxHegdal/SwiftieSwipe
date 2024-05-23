@@ -1,38 +1,41 @@
 "use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SongDisplay from "./components/SongDisplay";
-
-const songs = [
-  { title: "Love Story", album: "Fearless" },
-  { title: "You Belong With Me", album: "Fearless" },
-  { title: "Shake It Off", album: "1989" },
-  { title: "All Too Well", album: "Red" },
-  { title: "Cruel Summer", album: "Lover" },
-];
+import { fetchSongs } from "@/lib/api";
+import Spinner from "./components/spinner";
 
 const Home = () => {
+  const [songs, setSongs] = useState([]);
+  const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentSong, setCurrentSong] = useState(songs[0]);
 
-  const handleNext = () => {
-    const nextIndex = (currentIndex + 1) % songs.length;
-    console.log(nextIndex);
-    setCurrentIndex(nextIndex);
-    setCurrentSong(songs[nextIndex]);
-  };
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const songs = await fetchSongs();
+        setSongs(songs);
+        console.log(songs);
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <main>
       <h1>SwiftieSwipe</h1>
-      <div>
-        <SongDisplay song={currentSong} onNext={handleNext} />
-        <SongDisplay
-          song={songs[(currentIndex + 1) % songs.length]}
-          onNext={handleNext}
-        />
-        <button>
-        </button>
+      <div className="grid gap-6">
+        {songs.length > 0 ? (
+          songs.map((song, index) => (
+            <div key={index} className="bg-gray-100 p-4 rounded shadow-lg">
+              <p className=" align-middle">{song.name}</p>
+            </div>
+          ))
+        ) : (
+          <Spinner />
+        )}
       </div>
     </main>
   );
