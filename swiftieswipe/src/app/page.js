@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import SongDisplay from "./components/SongDisplay";
+import List from "./list";
 
 const songs = [
   { title: "Love Story", album: "Fearless" },
@@ -14,7 +15,6 @@ const songs = [
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentSong, setCurrentSong] = useState(songs[0]);
-
   const handleNext = () => {
     const nextIndex = (currentIndex + 1) % songs.length;
     console.log(nextIndex);
@@ -31,8 +31,7 @@ const Home = () => {
           song={songs[(currentIndex + 1) % songs.length]}
           onNext={handleNext}
         />
-        <button>
-        </button>
+        <List />
       </div>
     </main>
   );
