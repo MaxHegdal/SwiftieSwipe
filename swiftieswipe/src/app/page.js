@@ -24,9 +24,9 @@ const Home = () => {
 
   return (
     <main>
-      <h1>SwiftieSwipe</h1>
+      <h1 className="text-4xl opacity-80 font-medium mb-6 m-5">SwiftieSwipe</h1>
       <div>
-        <SongDisplay song={currentSong} onNext={handleNext} />
+
         <SongDisplay
           song={songs[(currentIndex + 1) % songs.length]}
           onNext={handleNext}
