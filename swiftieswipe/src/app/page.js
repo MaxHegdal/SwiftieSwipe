@@ -1,41 +1,60 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import SongDisplay from "./components/SongDisplay";
+import SongList from "./components/SongList";
 import { fetchSongs } from "@/lib/api";
-import Spinner from "./components/spinner";
 
 const Home = () => {
   const [songs, setSongs] = useState([]);
-  const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentSong, setCurrentSong] = useState(songs[0]);
+  const [currentSong, setCurrentSong] = useState(null);
+  const [savedSongs, setSavedSongs] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
+    const getSongs = async () => {
       try {
-        const songs = await fetchSongs();
-        setSongs(songs);
-        console.log(songs);
+        const fetchedSongs = await fetchSongs();
+        setSongs(fetchedSongs);
+        setCurrentSong(fetchedSongs[0]);
       } catch (error) {
-        console.error(error.message);
+        console.error("Failed to fetch songs:", error);
       }
+    };
+
+    getSongs();
+
+    if (savedSongs.length === 0) {
+      const storedSongs = JSON.parse(localStorage.getItem("savedSongs")) || [];
+      setSavedSongs(storedSongs);
     }
-    fetchData();
   }, []);
+
+  const handleNext = () => {
+    const nextIndex = (currentIndex + 1) % songs.length;
+    setCurrentIndex(nextIndex);
+    setCurrentSong(songs[nextIndex]);
+  };
+
+  const handleSave = (song) => {
+    const updatedSongs = [...savedSongs, song];
+    setSavedSongs(updatedSongs);
+    localStorage.setItem("savedSongs", JSON.stringify(updatedSongs));
+    handleNext(); 
+  };
 
   return (
     <main>
       <h1>SwiftieSwipe</h1>
-      <div className="grid gap-6">
-        {songs.length > 0 ? (
-          songs.map((song, index) => (
-            <div key={index} className="bg-gray-100 p-4 rounded shadow-lg">
-              <p className=" align-middle">{song.name}</p>
-            </div>
-          ))
-        ) : (
-          <Spinner />
+      <div>
+        {currentSong && (
+          <SongDisplay
+            song={currentSong}
+            onNext={handleNext}
+            onSave={handleSave}
+          />
         )}
+        <SongList savedSongs={savedSongs} setSavedSongs={setSavedSongs} />
       </div>
     </main>
   );
