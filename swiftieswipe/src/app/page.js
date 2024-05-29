@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <main>
-      <h1 className="text-4xl opacity-80 font-medium mb-6 m-5">SwiftieSwipe</h1>
+      <h1 className="text-gradient text-4xl opacity-100 font-medium mb-6 m-5">SwiftieSwipe</h1>
       <div>
 
         <SongDisplay

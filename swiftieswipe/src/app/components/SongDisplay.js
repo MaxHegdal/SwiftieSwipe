@@ -33,8 +33,8 @@ const SongDisplay = ({ song, onNext }) => {
     <div>
       <Card className="bg-transparent border-none">
         <CardHeader>
-          <CardTitle>Lyssna på</CardTitle>
-          <CardDescription>It's a Love Story baby just say yes...</CardDescription>
+        <CardTitle className="text-white">Lyssna på</CardTitle>
+        <CardDescription>It's a Love Story baby just say yes...</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="md:">
