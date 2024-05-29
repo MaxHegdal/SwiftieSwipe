@@ -12,11 +12,9 @@ import { Button } from "@/components/ui/button";
 
 import { useState } from "react";
 
-const SongDisplay = ({ song, onNext, savedSongs, setSavedSongs }) => {
+const SongDisplay = ({ song, onNext, onSave }) => {
   const handleSave = () => {
-    const updatedSongs = [...savedSongs, song];
-    setSavedSongs(updatedSongs);
-    localStorage.setItem("savedSongs", JSON.stringify(updatedSongs));
+    onSave(song);
   };
 
   return (

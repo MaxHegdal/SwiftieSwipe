@@ -2,10 +2,8 @@
 
 import { useState, useEffect } from "react";
 import SongDisplay from "./components/SongDisplay";
-import SongList from "./list";
+import SongList from "./components/SongList";
 import { fetchSongs } from "@/lib/api";
-
-
 
 const Home = () => {
   const [songs, setSongs] = useState([]);
@@ -26,14 +24,23 @@ const Home = () => {
 
     getSongs();
 
-    const storedSongs = JSON.parse(localStorage.getItem("savedSongs")) || [];
-    setSavedSongs(storedSongs);
+    if (savedSongs.length === 0) {
+      const storedSongs = JSON.parse(localStorage.getItem("savedSongs")) || [];
+      setSavedSongs(storedSongs);
+    }
   }, []);
 
   const handleNext = () => {
     const nextIndex = (currentIndex + 1) % songs.length;
     setCurrentIndex(nextIndex);
     setCurrentSong(songs[nextIndex]);
+  };
+
+  const handleSave = (song) => {
+    const updatedSongs = [...savedSongs, song];
+    setSavedSongs(updatedSongs);
+    localStorage.setItem("savedSongs", JSON.stringify(updatedSongs));
+    handleNext(); 
   };
 
   return (
@@ -44,8 +51,7 @@ const Home = () => {
           <SongDisplay
             song={currentSong}
             onNext={handleNext}
-            savedSongs={savedSongs}
-            setSavedSongs={setSavedSongs}
+            onSave={handleSave}
           />
         )}
         <SongList savedSongs={savedSongs} setSavedSongs={setSavedSongs} />
