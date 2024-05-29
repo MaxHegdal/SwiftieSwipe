@@ -2,7 +2,11 @@ const Spinner = () => {
   return (
     <div className="spinner">
       <div className="spinner__circle">
-        <h1 className=" animate-spin size-44">WEEE</h1>
+        <img
+          src="/taylorHead.png" 
+          alt="TayTay"
+          className="animate-spin w-20 h-20 rounded-full"
+        />
       </div>
     </div>
   );
