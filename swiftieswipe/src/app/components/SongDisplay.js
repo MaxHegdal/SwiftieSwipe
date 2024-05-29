@@ -12,19 +12,11 @@ import { Button } from "@/components/ui/button";
 
 import { useState } from "react";
 
-const SongDisplay = ({ song, onNext }) => {
-  const [savedSongs, setSavedSongs] = useState(() => {
-    if (typeof window !== "undefined") {
-      return JSON.parse(localStorage.getItem("savedSongs")) || [];
-    }
-    return [];
-  });
-
+const SongDisplay = ({ song, onNext, savedSongs, setSavedSongs }) => {
   const handleSave = () => {
     const updatedSongs = [...savedSongs, song];
     setSavedSongs(updatedSongs);
     localStorage.setItem("savedSongs", JSON.stringify(updatedSongs));
-    onNext();
   };
 
   return (
@@ -36,7 +28,8 @@ const SongDisplay = ({ song, onNext }) => {
         </CardHeader>
         <CardContent>
           <div>
-            <p className="">{song.title}</p>
+
+            <p className="">{song.name}</p>
             <p>{song.album}</p>
             <Button
               className=" m-5 bg-yellow-200 hover:bg-lime-400 text-stone-950 w-40 h-10 rounded-md"

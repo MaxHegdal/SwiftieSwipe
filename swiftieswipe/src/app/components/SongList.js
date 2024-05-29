@@ -26,7 +26,7 @@ const SongList = () => {
       {savedSongs.length > 0 ? (
         <ul>
           {savedSongs.map((song, index) => (
-            <li key={index}>{`${song.title} - ${song.album}`}</li>
+            <li key={index}>{`${song.name} - ${song.album}`}</li>
           ))}
         </ul>
       ) : (

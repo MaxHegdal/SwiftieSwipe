@@ -1,23 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SongDisplay from "./components/SongDisplay";
-import List from "./list";
+import SongList from "./list";
+import { fetchSongs } from "@/lib/api";
 
-const songs = [
-  { title: "Love Story", album: "Fearless" },
-  { title: "You Belong With Me", album: "Fearless" },
-  { title: "Shake It Off", album: "1989" },
-  { title: "All Too Well", album: "Red" },
-  { title: "Cruel Summer", album: "Lover" },
-];
+
 
 const Home = () => {
+  const [songs, setSongs] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentSong, setCurrentSong] = useState(songs[0]);
+  const [currentSong, setCurrentSong] = useState(null);
+  const [savedSongs, setSavedSongs] = useState([]);
+
+  useEffect(() => {
+    const getSongs = async () => {
+      try {
+        const fetchedSongs = await fetchSongs();
+        setSongs(fetchedSongs);
+        setCurrentSong(fetchedSongs[0]);
+      } catch (error) {
+        console.error("Failed to fetch songs:", error);
+      }
+    };
+
+    getSongs();
+
+    const storedSongs = JSON.parse(localStorage.getItem("savedSongs")) || [];
+    setSavedSongs(storedSongs);
+  }, []);
+
   const handleNext = () => {
     const nextIndex = (currentIndex + 1) % songs.length;
-    console.log(nextIndex);
     setCurrentIndex(nextIndex);
     setCurrentSong(songs[nextIndex]);
   };
@@ -26,12 +40,15 @@ const Home = () => {
     <main>
       <h1>SwiftieSwipe</h1>
       <div>
-        <SongDisplay song={currentSong} onNext={handleNext} />
-        <SongDisplay
-          song={songs[(currentIndex + 1) % songs.length]}
-          onNext={handleNext}
-        />
-        <List />
+        {currentSong && (
+          <SongDisplay
+            song={currentSong}
+            onNext={handleNext}
+            savedSongs={savedSongs}
+            setSavedSongs={setSavedSongs}
+          />
+        )}
+        <SongList savedSongs={savedSongs} setSavedSongs={setSavedSongs} />
       </div>
     </main>
   );
