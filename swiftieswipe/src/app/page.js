@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { fetchSongsWithAlbums } from "../lib/api";
 import HamburgerMenu from "./components/HamburgerMenu";
-import Spinner from "./components/Spinner";
+import Spinner from "./components/TaylorSpinner";
 
 export default function Home() {
   const [songs, setSongs] = useState([]);
@@ -143,6 +143,11 @@ export default function Home() {
                 />
               </svg>
             </button>
+          </div>
+          <div className=" flex">
+            <p className="text-gray-700 m-2">
+              {songs[currentSongIndex].lyrics}
+            </p>
           </div>
         </div>
       ) : (
