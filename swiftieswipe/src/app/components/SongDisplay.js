@@ -43,12 +43,12 @@ const SongDisplay = ({ song, onNext }) => {
               <p className="text-gray-100">{song.album}</p>
             </div>
             <Button
-              className="bg-neutral-700 rounded-full w-24 h-24 m-5
+              className="bg-neutral-700 bg-opacity-50 rounded-full w-24 h-24 m-5
               md:w-52 md:justify-start md:m-3"
               onClick={handleSave}>
               <img className="md:h-16" src={Heart.src} alt="Lägg Till" />
             </Button>
-            <Button className="bg-neutral-700 rounded-full w-24 h-24 md:w-52 md:justify-start" onClick={onNext}>
+            <Button className="bg-neutral-700 bg-opacity-50 rounded-full w-24 h-24 md:w-52 md:justify-start" onClick={onNext}>
               <img className="md:h-16 md:justify-start md:m-3" src={Remove.src} alt="Ta Bort" />
             </Button>
           </div>
