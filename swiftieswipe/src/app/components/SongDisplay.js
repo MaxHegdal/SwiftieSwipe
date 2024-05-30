@@ -27,7 +27,7 @@ const SongDisplay = ({ song, onNext, onSave }) => {
         <CardDescription>It's a Love Story baby just say yes...</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="md:">
+          <div>
             <div>
               <p className="text-2xl text-gray-100">{song.name}</p>
               <p className="text-gray-100">{song.album}</p>
