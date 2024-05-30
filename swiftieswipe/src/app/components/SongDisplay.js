@@ -7,6 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Remove from "../images/remove.png";
+import Heart from "../images/heart.png";
 
 import { Button } from "@/components/ui/button";
 
@@ -19,23 +21,26 @@ const SongDisplay = ({ song, onNext, onSave }) => {
 
   return (
     <div>
-      <Card>
+      <Card className="bg-transparent border-none">
         <CardHeader>
-          <CardTitle>Lyssna på</CardTitle>
-          <CardDescription>Är det en hit eller miss?</CardDescription>
+        <CardTitle className="text-white">Lyssna på</CardTitle>
+        <CardDescription>It's a Love Story baby just say yes...</CardDescription>
         </CardHeader>
         <CardContent>
-          <div>
-
-            <p className="">{song.name}</p>
-            <p>{song.album}</p>
+          <div className="md:">
+            <div>
+              <p className="text-2xl text-gray-100">{song.name}</p>
+              <p className="text-gray-100">{song.album}</p>
+            </div>
             <Button
-              className=" m-5 bg-yellow-200 hover:bg-lime-400 text-stone-950 w-40 h-10 rounded-md"
-              onClick={handleSave}
-            >
-              Lägg till
+              className="bg-neutral-700 bg-opacity-50 rounded-full w-24 h-24 m-5
+              md:w-52 md:justify-start md:m-3"
+              onClick={handleSave}>
+              <img className="md:h-16" src={Heart.src} alt="Lägg Till" />
             </Button>
-            <Button onClick={onNext}>Inte den</Button>
+            <Button className="bg-neutral-700 bg-opacity-50 rounded-full w-24 h-24 md:w-52 md:justify-start" onClick={onNext}>
+              <img className="md:h-16 md:justify-start md:m-3" src={Remove.src} alt="Ta Bort" />
+            </Button>
           </div>
         </CardContent>
       </Card>

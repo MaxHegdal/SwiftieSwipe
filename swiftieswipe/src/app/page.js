@@ -49,6 +49,20 @@ export default function Home() {
     setDislikedSongs([...dislikedSongs, songs[currentSongIndex]]);
     handleNext();
   };
+  return (
+    <main>
+      <h1 className="text-gradient text-4xl opacity-100 font-medium mb-6 m-5">SwiftieSwipe</h1>
+      <div>
+
+        <SongDisplay
+          song={songs[(currentIndex + 1) % songs.length]}
+          onNext={handleNext}
+        />
+        <List />
+      </div>
+    </main>
+  );
+};
 
   useEffect(() => {
     localStorage.setItem("dislikedSongs", JSON.stringify(dislikedSongs));
