@@ -45,8 +45,8 @@ const HamburgerMenu = ({
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          stroke="currentColor"
-          className="w-10 h-10"
+          stroke="#ffffff"
+          className="w-10 h-10" // Change background color to white
         >
           <path
             strokeLinecap="round"
@@ -96,7 +96,7 @@ const HamburgerMenu = ({
                   alt={song.album}
                   className="w-12 h-12 object-cover rounded-lg mr-4"
                 />
-                <span className="flex-1 text-lg">{song.name}</span>
+                <span className="flex-1 text-lg text-slate-800">{song.name}</span>
                 <button
                   onClick={() => removeSong(index)}
                   className="bg-red-500 text-white rounded-full p-2 shadow-md hover:bg-red-600 focus:outline-none"
@@ -105,7 +105,7 @@ const HamburgerMenu = ({
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke="currentColor"
+                    stroke="#ffffff"
                     className="w-4 h-4"
                   >
                     <path

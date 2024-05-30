@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { fetchSongsWithAlbums } from "../lib/api";
 import HamburgerMenu from "./components/HamburgerMenu";
 import Spinner from "./components/TaylorSpinner";
-import SongDisplay from "./components/SongDisplay";
 
 export default function Home() {
   const [songs, setSongs] = useState([]);
@@ -82,20 +81,18 @@ export default function Home() {
 
   return (
     <main>
-      <h1 className="text-gradient text-4xl opacity-100 font-medium mb-6 m-5">SwiftieSwipe</h1>
+      <h1 className="text-gradient text-4xl opacity-100 font-medium m-10 ">SwiftieSwipe</h1>
       <div>
         {songs.length > 0 ? (
           <>
-            <SongDisplay
-              song={songs[(currentSongIndex + 1) % songs.length]}
-              onNext={handleNext}
-            />
-            <div className="flex flex-col items-center justify-center min-h-screen">
-              <div className="absolute top-0 left-0">
+            <div className="flex flex-col items-center justify-center">
+              <div className="absolute top-1 left-1">
                 <HamburgerMenu likedSongs={likedSongs} removeSong={removeSong} />
               </div>
               <div className="w-full max-w-sm">
-                <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+                <div className=" bg-white  p-6 rounded-lg shadow-xl text-center bg-blend-overlay"> {
+
+                }
                   <img
                     src={songs[currentSongIndex].albumCover}
                     alt={songs[currentSongIndex].title}
@@ -104,7 +101,7 @@ export default function Home() {
                   <h1 className="text-2xl font-bold mb-2">
                     {songs[currentSongIndex].title}
                   </h1>
-                  <p className="text-black-700">{songs[currentSongIndex].name}</p>
+                  <p className=" text-slate-900 ">{songs[currentSongIndex].name}</p>
                   <p className="text-gray-700">{songs[currentSongIndex].album}</p>
                 </div>
                 <div className="flex justify-between mt-6">
@@ -147,16 +144,13 @@ export default function Home() {
                     </svg>
                   </button>
                 </div>
-                <div className=" flex">
-                  <p className="text-gray-700 m-2">
-                    {songs[currentSongIndex].lyrics}
-                  </p>
-                </div>
               </div>
             </div>
           </>
         ) : (
-          <Spinner />
+          <div className="flex justify-center align-middle">
+            <Spinner />
+          </div>
         )}
       </div>
     </main>
