@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { fetchSongsWithAlbums } from "../lib/api";
 import HamburgerMenu from "./components/HamburgerMenu";
 import Spinner from "./components/TaylorSpinner";
+import Heart from "./images/heart.png";
+import Delete from "./images/remove.png";
 
 export default function Home() {
   const [songs, setSongs] = useState([]);
@@ -81,67 +83,41 @@ export default function Home() {
 
   return (
     <main>
-      <h1 className="text-gradient text-4xl opacity-100 font-medium m-10 ">SwiftieSwipe</h1>
+      <h1 className="bg-gradient-to-b from-gray-50 via-gray-200 to-gray-800 inline-block opacity-70 text-transparent bg-clip-text
+      text-5xl font-medium m-10 ml-28">SwiftieSwipe</h1>
       <div>
         {songs.length > 0 ? (
           <>
             <div className="flex flex-col items-center justify-center">
-              <div className="absolute top-1 left-1">
+              <div className="absolute top-12 left-12">
                 <HamburgerMenu likedSongs={likedSongs} removeSong={removeSong} />
               </div>
               <div className="w-full max-w-sm">
-                <div className=" bg-white  p-6 rounded-lg shadow-xl text-center bg-blend-overlay"> {
+                <div className="backdrop-blur bg-white/10   p-6 rounded-lg shadow-xl text-center bg-blend-overlay"> {
 
                 }
                   <img
                     src={songs[currentSongIndex].albumCover}
                     alt={songs[currentSongIndex].title}
-                    className="w-full h-64 object-cover mb-4 rounded-lg"
+                    className="w-full h-full object-cover mb-4 rounded-lg"
                   />
-                  <h1 className="text-2xl font-bold mb-2">
-                    {songs[currentSongIndex].title}
-                  </h1>
-                  <p className=" text-slate-900 ">{songs[currentSongIndex].name}</p>
-                  <p className="text-gray-700">{songs[currentSongIndex].album}</p>
+                  <p className="text-white-900 font-bold">{songs[currentSongIndex].name}</p>
+                  <p className="text-white-600">{songs[currentSongIndex].album}</p>
                 </div>
-                <div className="flex justify-between mt-6">
+                <div className="flex justify-evenly mt-6">
                   <button
                     onClick={handleDislike}
-                    className="bg-red-500 text-white rounded-full p-4 shadow-md hover:bg-red-600"
+                    className="backdrop-blur bg-white/10 rounded-full p-4 shadow-md hover:bg-gray/10
+                    flex justify-center items-center h-40 w-40"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="h-6 w-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
+                    <img src={Delete.src} alt="delete-icon" className="h-5/6 opacity-75"/>
                   </button>
                   <button
                     onClick={handleLike}
-                    className="bg-green-500 text-white rounded-full p-4 shadow-md hover:bg-green-600"
+                    className="backdrop-blur bg-white/10 rounded-full p-4 shadow-md hover:bg-gray/10 
+                    flex justify-center items-center h-40 w-40"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="h-6 w-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
+                    <img src={Heart.src} alt="heart-icon" className="h-5/6 opacity-75"/>
                   </button>
                 </div>
               </div>

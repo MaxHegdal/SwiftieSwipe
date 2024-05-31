@@ -1,6 +1,7 @@
 // components/HamburgerMenu.js
 import { useState } from "react";
 import { motion, stagger } from "framer-motion";
+import Playlist from "../images/playlist.png";
 
 const menuVariants = {
   open: {
@@ -41,20 +42,7 @@ const HamburgerMenu = ({
   return (
     <div className="relative">
       <button className="text-black focus:outline-none" onClick={toggleMenu}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="#ffffff"
-          className="w-10 h-10" // Change background color to white
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16M4 12h16m-7 6h7"
-          />
-        </svg>
+        <img src={Playlist.src} alt="playlist icon" className="h-11"/> 
       </button>
 
       <motion.div
@@ -82,7 +70,7 @@ const HamburgerMenu = ({
             />
           </svg>
         </button>
-        <nav className="flex flex-col items-start p-8">
+        <nav className="flex flex-col items-start p-8 bg-gray-900 opacity-85">
           {likedSongs.length === 0 ? (
             <p className=" ">Gillar du ingen TayTay?</p>
           ) : (
@@ -96,7 +84,7 @@ const HamburgerMenu = ({
                   alt={song.album}
                   className="w-12 h-12 object-cover rounded-lg mr-4"
                 />
-                <span className="flex-1 text-lg text-slate-800">{song.name}</span>
+                <span className="flex-1 text-lg text-slate-50">{song.name}</span>
                 <button
                   onClick={() => removeSong(index)}
                   className="bg-red-500 text-white rounded-full p-2 shadow-md hover:bg-red-600 focus:outline-none"
