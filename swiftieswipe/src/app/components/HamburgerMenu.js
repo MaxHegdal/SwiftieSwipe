@@ -42,7 +42,7 @@ const HamburgerMenu = ({
   return (
     <div className="relative">
       <button className="text-black focus:outline-none" onClick={toggleMenu}>
-        <img src={Playlist.src} alt="playlist icon" className="h-11" />
+        <img src={Playlist.src} alt="playlist icon" className="h-10 opacity-80" />
       </button>
 
 
@@ -52,7 +52,7 @@ const HamburgerMenu = ({
         animate={isOpen ? "open" : "closed"}
         variants={menuVariants}
       >
-        <div className="bg-gray-900">
+        <div className="bg-gray-800">
           <button
             className="m-5 text-gray-300 focus:outline-none"
             onClick={toggleMenu}
@@ -89,7 +89,7 @@ const HamburgerMenu = ({
                   <span className="flex-1 text-lg text-slate-50">{song.name}</span>
                   <button
                     onClick={() => removeSong(index)}
-                    className="bg-rose-600 text-white rounded-full p-2 shadow-md hover:bg-rose-700 focus:outline-none"
+                    className="bg-rose-600 text-white rounded-full p-2 shadow-md hover:bg-rose-800 focus:outline-none"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

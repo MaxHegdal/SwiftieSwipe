@@ -89,17 +89,15 @@ export default function Home() {
         {songs.length > 0 ? (
           <>
             <div className="flex flex-col items-center justify-center lg:w-full">
-              <div className="absolute top-12 left-12">
+              <div className="absolute top-10 left-12">
                 <HamburgerMenu likedSongs={likedSongs} removeSong={removeSong} />
               </div>
-              <div className="w-full max-w-full lg:grid lg:grid-cols-3 lg:gap-4">
-                <div className="backdrop-blur bg-white/10 m-5 p-6 rounded-lg shadow-xl text-center bg-blend-overlay lg:col-span-2"> {
-
-                }
+              <div className="w-full max-w-full lg:max-h-screen lg:grid lg:grid-cols-3 lg:gap-4">
+                <div className="backdrop-blur bg-white/10 m-5 p-6 rounded-lg shadow-xl text-center bg-blend-overlay lg:col-span-2 flex-column"> 
                   <img
                     src={songs[currentSongIndex].albumCover}
                     alt={songs[currentSongIndex].title}
-                    className="h-96 object-cover mb-4 rounded-lg"
+                    className="w-full max-h-4/6  mb-4 rounded-lg object-cover"
                   />
                   <p className="text-white-900 font-bold">{songs[currentSongIndex].name}</p>
                   <p className="text-white-600">{songs[currentSongIndex].album}</p>
@@ -107,17 +105,19 @@ export default function Home() {
                 <div className="flex justify-evenly mt-6 lg:flex-col lg:justify-around lg:col-start-3">
                   <button
                     onClick={handleDislike}
-                    className="backdrop-blur bg-white/10 rounded-full p-4 shadow-md hover:bg-gray/10
-                    flex justify-center items-center h-40 w-40"
+                    className="backdrop-blur bg-white/10 rounded-full p-4 shadow-md  md:opacity-60 hover:opacity-100
+                    flex justify-center items-center h-40 w-40 md:w-11/12 md:justify-around"
                   >
-                    <img src={Delete.src} alt="delete-icon" className="h-5/6 opacity-75"/>
+                    <img src={Delete.src} alt="delete-icon" className="h-5/6 opacity-75 md:h-4/6"/>
+                    <span className="max-md:hidden text-3xl">You're losing me</span>
                   </button>
                   <button
                     onClick={handleLike}
-                    className="backdrop-blur bg-white/10 rounded-full p-4 shadow-md hover:bg-gray/10 
-                    flex justify-center items-center h-40 w-40"
+                    className="backdrop-blur bg-white/10 rounded-full p-4 shadow-md md:opacity-60 hover:opacity-100
+                    flex justify-center items-center h-40 w-40 md:w-11/12 md:justify-around"
                   >
-                    <img src={Heart.src} alt="heart-icon" className="h-5/6 opacity-75"/>
+                    <img src={Heart.src} alt="heart-icon" className="h-5/6 opacity-75 md:h-4/6"/>
+                    <span className="max-md:hidden text-3xl ">You belong with me</span>
                   </button>
                 </div>
               </div>
