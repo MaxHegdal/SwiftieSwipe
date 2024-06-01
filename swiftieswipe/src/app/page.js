@@ -88,23 +88,23 @@ export default function Home() {
       <div>
         {songs.length > 0 ? (
           <>
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center lg:w-full">
               <div className="absolute top-12 left-12">
                 <HamburgerMenu likedSongs={likedSongs} removeSong={removeSong} />
               </div>
-              <div className="w-full max-w-sm">
-                <div className="backdrop-blur bg-white/10   p-6 rounded-lg shadow-xl text-center bg-blend-overlay"> {
+              <div className="w-full max-w-full lg:grid lg:grid-cols-3 lg:gap-4">
+                <div className="backdrop-blur bg-white/10 m-5 p-6 rounded-lg shadow-xl text-center bg-blend-overlay lg:col-span-2"> {
 
                 }
                   <img
                     src={songs[currentSongIndex].albumCover}
                     alt={songs[currentSongIndex].title}
-                    className="w-full h-full object-cover mb-4 rounded-lg"
+                    className="h-96 object-cover mb-4 rounded-lg"
                   />
                   <p className="text-white-900 font-bold">{songs[currentSongIndex].name}</p>
                   <p className="text-white-600">{songs[currentSongIndex].album}</p>
                 </div>
-                <div className="flex justify-evenly mt-6">
+                <div className="flex justify-evenly mt-6 lg:flex-col lg:justify-around lg:col-start-3">
                   <button
                     onClick={handleDislike}
                     className="backdrop-blur bg-white/10 rounded-full p-4 shadow-md hover:bg-gray/10
