@@ -1,5 +1,6 @@
 # SwiftieSwipe
- En Taylor Swift-upplevelse inbakat i ett familjärt tinder skal
+ En Taylor Swift-upplevelse inbakat i ett familjärt tinder skal, Swipea bland låtarna och spara dem du tycker om!
+ Se över din lista som sparas igenom localStorage och ta bort de du inte vill eller alla om du skulle önska att börja om!
 
 #För att starta!:
 1. öppna terminalen i huvudprojektet. Undersök vilken mapp du är i genom kommando ls.
