@@ -1,13 +1,12 @@
-// components/HamburgerMenu.js
 import { useState } from "react";
-import { motion, stagger } from "framer-motion";
+import { motion } from "framer-motion";
 import Playlist from "../images/playlist.png";
 
 const menuVariants = {
   open: {
     opacity: 1,
     x: 0,
-    overflowY: "scroll", // Add overflowY property for scrollable content
+    overflowY: "scroll",
     transition: {
       type: "spring",
       stiffness: 260,
@@ -27,12 +26,7 @@ const menuVariants = {
   },
 };
 
-const HamburgerMenu = ({
-  likedSongs,
-  removeSong,
-  removedSongs,
-  setRemovedSongs,
-}) => {
+const HamburgerMenu = ({ likedSongs, removeSong, clearAll }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -41,18 +35,25 @@ const HamburgerMenu = ({
 
   return (
     <div className="relative">
-      <button className="text-black focus:outline-none" onClick={toggleMenu}>
-        <img src={Playlist.src} alt="playlist icon" className="h-10 opacity-80" />
+      <button
+        className="text-black focus:outline-none"
+        onClick={toggleMenu}
+        aria-label="Toggle Menu"
+      >
+        <img
+          src={Playlist.src}
+          alt="playlist icon"
+          className="h-10 opacity-80"
+        />
       </button>
 
-
       <motion.div
-        className="fixed top-0 left-0 w-3/4 sm:w-1/3 h-full bg-white shadow-lg z-50"
+        className="fixed top-0 left-0 w-3/4 sm:w-1/3 h-full bg-gray-800 shadow-lg z-50"
         initial="closed"
         animate={isOpen ? "open" : "closed"}
         variants={menuVariants}
       >
-        <div className="bg-gray-800">
+        <div className="bg-gray-800 h-full">
           <button
             className="m-5 text-gray-300 focus:outline-none"
             onClick={toggleMenu}
@@ -72,9 +73,15 @@ const HamburgerMenu = ({
               />
             </svg>
           </button>
+          <button
+            className="absolute top-0 right-0 m-5 text-gray-300 focus:outline-none"
+            onClick={clearAll}
+          >
+            Radera Allt
+          </button>
           <nav className="flex flex-col items-start p-8 top-3">
             {likedSongs.length === 0 ? (
-              <p className=" ">Gillar du ingen TayTay?</p>
+              <p className=" ">Du har inga gillade låtar.</p>
             ) : (
               likedSongs.map((song, index) => (
                 <div
@@ -86,10 +93,13 @@ const HamburgerMenu = ({
                     alt={song.album}
                     className="w-12 h-12 object-cover rounded-lg mr-4"
                   />
-                  <span className="flex-1 text-lg text-slate-50">{song.name}</span>
+                  <span className="flex-1 text-lg text-slate-50">
+                    {song.name}
+                  </span>
                   <button
                     onClick={() => removeSong(index)}
                     className="bg-rose-600 text-white rounded-full p-2 shadow-md hover:bg-rose-800 focus:outline-none"
+                    aria-label="Remove Song"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +122,7 @@ const HamburgerMenu = ({
           </nav>
         </div>
       </motion.div>
-    </div >
+    </div>
   );
 };
 
